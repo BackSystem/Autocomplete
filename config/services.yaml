@@ -1,0 +1,23 @@
+services:
+    BackSystem\Autocomplete\AutocompleteCompilerPass:
+        class: 'BackSystem\Autocomplete\AutocompleteCompilerPass'
+
+    autocomplete.registry:
+        class: 'BackSystem\Autocomplete\Registry'
+        arguments:
+            $autocompletersLocator: !abstract service locator
+
+    autocomplete.executor:
+        class: 'BackSystem\Autocomplete\ResultsExecutor'
+        arguments:
+          [ '@doctrine', '@security.helper' ]
+
+    BackSystem\Autocomplete\Controller\ApiController:
+        tags: [ 'controller.service_arguments' ]
+        arguments:
+          [ '@autocomplete.registry', '@autocomplete.executor' ]
+
+    BackSystem\Autocomplete\Type\AutocompleteType:
+        autoconfigure: true
+        class: 'BackSystem\Autocomplete\Type\AutocompleteType'
+        arguments: [ '@router', '@doctrine.orm.entity_manager' ]
