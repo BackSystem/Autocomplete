@@ -1,6 +1,6 @@
 .PHONY: stan
 stan:
-	./vendor/phpstan/phpstan/phpstan
+	./vendor/phpstan/phpstan/phpstan --memory-limit=-1
 
 .PHONY: format
 format:
