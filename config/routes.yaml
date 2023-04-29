@@ -1,0 +1,4 @@
+autocomplete_search:
+    path: '/{endpoint}'
+    controller: 'BackSystem\Autocomplete\Controller\ApiController'
+    methods: 'GET'

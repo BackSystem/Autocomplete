@@ -41,4 +41,9 @@ interface ApiInterface
      * @param T $entity
      */
     public function getLabel(mixed $entity): string;
+
+    /**
+     * @param T $entity
+     */
+    public function getTitle(mixed $entity): string;
 }

@@ -42,4 +42,12 @@ abstract class AbstractApi implements ApiInterface
     {
         return method_exists($entity, 'getId') ? $entity->getId() : 'Unknown';
     }
+
+    /**
+     * @param T $entity
+     */
+    public function getTitle($entity): string
+    {
+        return $this->getLabel($entity);
+    }
 }

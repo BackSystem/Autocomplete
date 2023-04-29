@@ -37,10 +37,20 @@ final class ResultsExecutor
         $results = [];
 
         foreach ($queryBuilder->getQuery()->getResult() as $entity) {
-            $results[] = [
-                'label' => $autocompleter->getLabel($entity),
+            $label = $autocompleter->getLabel($entity);
+
+            $result = [
+                'label' => $label,
                 'value' => $autocompleter->getValue($entity),
             ];
+
+            $title = $autocompleter->getTitle($entity);
+
+            if ($label !== $title) {
+                $result['title'] = $title;
+            }
+
+            $results[] = $result;
         }
 
         return new Results($results);
