@@ -175,6 +175,15 @@ class AutocompleteType extends AbstractType
     {
         $api = $this->getApi($className);
 
-        return new ChoiceView($entity, $api->getValue($entity), $api->getLabel($entity));
+        $attributes = [];
+
+        $label = $api->getLabel($entity);
+        $title = $api->getTitle($entity);
+
+        if ($label !== $title) {
+            $attributes['data-title'] = $title;
+        }
+
+        return new ChoiceView($entity, $api->getValue($entity), $label, $attributes);
     }
 }
