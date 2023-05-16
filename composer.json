@@ -24,5 +24,10 @@
     "require-dev": {
         "phpstan/phpstan": "^1.8",
         "friendsofphp/php-cs-fixer": "^3.13"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "v1.0-dev"
+        }
     }
 }
