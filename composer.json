@@ -9,12 +9,12 @@
     "license": "MIT",
     "require": {
         "php": ">=8.1",
-        "symfony/dependency-injection": "^6.0",
-        "symfony/http-kernel": "^6.0",
-        "symfony/security-bundle": "^6.0",
-        "symfony/form": "^6.0",
-        "doctrine/orm": "^2.9",
-        "doctrine/doctrine-bundle": "^2.4"
+        "symfony/dependency-injection": ">=6.0",
+        "symfony/http-kernel": ">=6.0",
+        "symfony/security-bundle": ">=6.0",
+        "symfony/form": ">=6.0",
+        "doctrine/orm": ">=2.9",
+        "doctrine/doctrine-bundle": ">=2.4"
     },
     "autoload": {
         "psr-4": {
@@ -22,8 +22,8 @@
         }
     },
     "require-dev": {
-        "phpstan/phpstan": "^1.8",
-        "friendsofphp/php-cs-fixer": "^3.13"
+        "phpstan/phpstan": ">=1.8",
+        "friendsofphp/php-cs-fixer": ">=3.13"
     },
     "extra": {
         "branch-alias": {
