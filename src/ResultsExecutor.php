@@ -36,7 +36,7 @@ final class ResultsExecutor
 
         $results = [];
 
-        foreach ($queryBuilder->getQuery()->getResult() as $entity) {
+        foreach ($queryBuilder->distinct()->getQuery()->getResult() as $entity) {
             $label = $autocompleter->getLabel($entity);
 
             $result = [

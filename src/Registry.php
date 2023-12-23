@@ -9,6 +9,9 @@ use Symfony\Component\DependencyInjection\ServiceLocator;
  */
 final class Registry
 {
+    /**
+     * @param ServiceLocator<ApiInterface<T>> $autocompletersLocator
+     */
     public function __construct(private readonly ServiceLocator $autocompletersLocator)
     {
     }
