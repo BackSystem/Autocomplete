@@ -29,9 +29,11 @@ class AutocompleteType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setRequired('class')->setRequired('placeholder');
+        $resolver->setRequired('class');
 
         $resolver->setDefaults([
+            'choices' => [],
+            'placeholder' => '',
             'compound' => false,
             'multiple' => false,
         ]);
@@ -108,7 +110,7 @@ class AutocompleteType extends AbstractType
             $view->vars['full_name'] .= '[]';
         }
 
-        $view->vars['choices'] = $this->choices($form->getData(), $className);
+        $view->vars['choices'] = $this->choices($form->getData(), $className, $options['choices']);
 
         $parsedUrl = parse_url($this->getApi($className)->getUrl());
         $path = $parsedUrl['path'] ?? null;
@@ -147,24 +149,33 @@ class AutocompleteType extends AbstractType
     /**
      * @param Collection<int, T>|array<T>|T|null $data
      * @param class-string<ApiInterface<T>>      $className
+     * @param array<T>                           $choices
      *
      * @return ChoiceView[]
      */
-    private function choices(mixed $data, string $className): array
+    private function choices(mixed $data, string $className, array $choices): array
     {
-        if (null === $data) {
-            return [];
+        $array = [];
+
+        if ($data) {
+            if ($data instanceof Collection) {
+                $data = $data->toArray();
+            }
+
+            if (is_array($data)) {
+                foreach ($data as $entity) {
+                    $array[] = $this->getChoiceView($entity, $className);
+                }
+            } else {
+                $array[] = $this->getChoiceView($data, $className);
+            }
         }
 
-        if ($data instanceof Collection) {
-            $data = $data->toArray();
+        foreach ($choices as $choice) {
+            $array[] = $this->getChoiceView($choice, $className);
         }
 
-        if (is_array($data)) {
-            return array_map(fn ($entity) => $this->getChoiceView($entity, $className), $data);
-        }
-
-        return [$this->getChoiceView($data, $className)];
+        return $array;
     }
 
     /**
